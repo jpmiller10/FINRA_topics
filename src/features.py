@@ -21,7 +21,7 @@ def get_stop_words(new_stop_words=None):
 def remove_punctuation(string, punc=punctuation):
     # remove given punctuation marks from a string
     for character in punc:
-        string = string.replace(character,'')
+        string = string.replace(character,' ')
     return string
 
 def lemmatize_str(string):
@@ -97,6 +97,6 @@ if __name__ == '__main__':
     top_words = get_topic_words(H, features, n_features=n_top_words)
     df_finra['topics'] = document_topics(W)
     print_topics(top_words)
-    # df_finra.to_pickle("data/bigfoot_pickled_df")
+    df_finra.to_pickle("data/finra_pickled_df_top")
     topic_counts(df_finra)
 
