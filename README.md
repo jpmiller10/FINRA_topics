@@ -74,4 +74,5 @@ The accuracy on the Favorable/Settled/Unfavorable test set is 0.742.
 
 Decision                                     |  Acceptance, Waiver & Consent(AWC)             | Order
 :-------------------------------------------:|:----------------------------------------------:|:----------------------------------------------:
-![](images/nb_top_features_12_Decision.png)  |![](images/nb_top_features_12_Acceptance, Waiver & Consent(AWC).png)| ![](images/nb_top_features_12_Order.png)
+![](images/nb_top_features_12_Decision.png)  | ![](images/nb_top_features_12_AWC.png)         | ![](images/nb_top_features_12_Order.png)
+![](images/nb_top_features_12_Decision.png)  | ![](images/nb_top_features_12_AWC.png)         | ![](images/nb_top_features_12_Order.png)
