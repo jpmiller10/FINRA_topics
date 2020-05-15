@@ -81,7 +81,7 @@ def vectorize(df, column, stop_words):
     features = np.array(vectorizer.get_feature_names())
     return X, features 
 
-def get_nmf(X, n_components=):
+def get_nmf(X, n_components=7):
     ''' 
     Create NMF matrixes based on a TF-IDF matrix
      Arguments:
