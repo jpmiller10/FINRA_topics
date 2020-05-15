@@ -1,7 +1,12 @@
-# Intro to FINRA
+# Intro to FINRA Topics
+![](images/FINRA_Imafe.jpeg)                 |  ![](images/lawyer.jpeg)
+:-------------------------------------------:|:----------------------------------------------: 
+
+## Problem Framing
+In consultation with a law firm here in the Denver Metro Area, I sought to provide a tool for use in client-counseling in the context of a pending FINRA arbitration. 
 
 ## What is FINRA?
-FINRA is authorized by Congress to protect America’s investors by making sure the broker-dealer industry operates fairly and honestly. We oversee more than 634,000 brokers across the country—and analyze billions of daily market events.
+FINRA is a quasi-governmental regulatory body authorized by Congress to protect America’s investors by making sure the broker-dealer industry operates fairly and honestly. We oversee more than 634,000 brokers across the country—and analyze billions of daily market events.
 
 ## The DataSet
 This DataSet contained over 27,232 FINRA Arbitration records from 1964 through 2018. It contained the fields of:
@@ -11,9 +16,9 @@ This DataSet contained over 27,232 FINRA Arbitration records from 1964 through 2
 - `date_initiated`: date that the complaint was filed with FINRA (fka: NASD prior to 2004) 
 - `resolution_date`: date complaint was resolved
 - `allegations`: allegations that make up the complaint
-- `resolution`: outcome of the complaint - 12 possibilites
+- `resolution`: outcome of the complaint - 12 possibilities
 - `sanctions`: sanctions awarded if any
-- `sanction_details`: detail of the sanctions including award amount, suspension lenght, etc. 
+- `sanction_details`: detail of the sanctions including award amount, suspension length, etc. 
 
 I wanted to focus on determining whether it is possible to predict the outcome of a FINRA arbitration from the text of the allegations made against them. To do this I first cleaned the data with `src/clean.py`. I knew upfront that there was likely to be too many possible outcomes with 12 distinct possibilities, so I engineered two additional features to add to the DataSet that are the resolution with only 3 outcomes: Favorable, Settled, and Unfavorable; and resolution with only 2 outcomes: Favorable and Unfavorable. There were about 300 entries to the DataSet that were missing key data to continue analysis, they were discarded.  
 
@@ -30,33 +35,33 @@ Favorable                                    |  Unfavorable
 
 # Modeling
 
-Seeing that there is a noticible distinction in the words that were found on the favorable and unfavorable targets, I wanted to see if I could narrow down the overall Topics within the corpus.
+Seeing that there is a noticeable distinction in the words that were found on the favorable and unfavorable targets, I wanted to see if I could narrow down the overall Topics within the corpus.
 
-## NLP with Non-Negative Matrix Facturization
-I passed the corpus through a processing pipeline, and through NMF. I tried several varing numbers of features, then I got the following results with 5 features: 
+## NLP with Non-Negative Matrix Factorization
+I passed the corpus through a processing pipeline, and through NMF. I tried several varying numbers of features, then I got the following results with 5 features: 
 ![](images/SS_NMF.png) 
 
-I then consulted with the founder of one of the preeminent law firms that is dedicated to representing Broker-Dealers. He confirned that these topics looked correct and correlated to the types of cases he sees. Together we maned them:
+I then consulted with the founder of one of the preeminent law firms that is dedicated to representing Broker-Dealers. He confirmed that these topics looked correct and correlated to the types of cases he sees. Together we maned them:
 
 TOPIC 0: `Misrepresentation/Breach of Fiduciary Duty`
 
-![](images/wordcloud_Topic0.png) 
+![](images/wordcloud_topic0.png) 
 
 TOPIC 1: `Trade Violation`
 
-![](images/wordcloud_Topic1.png) 
+![](images/wordcloud_topic1.png) 
 
 TOPIC 2: `Violation of Law`
 
-![](images/wordcloud_Topic2.png) 
+![](images/wordcloud_topic2.png) 
 
 TOPIC 3: `Reporting Violation`
 
-![](images/wordcloud_Topic3.png) 
+![](images/wordcloud_topic3.png) 
 
 TOPIC 4: `Auction Rate Securities` 
 
-![](images/wordcloud_Topic4.png) 
+![](images/wordcloud_topic4.png) 
 
 
 ## Naive Bayes
@@ -160,8 +165,10 @@ Favorable                                    |  Unfavorable
 ![](images/nb_top_features_2_Favorable.png)  |  ![](images/nb_top_features_2_Unfavorable.png)
 ![](images/wordcloud_2_TargetsFavorable.png) |  ![](images/wordcloud_2_TargetsUnfavorable.png)
 
+There relatively balanced classes in this case, with 10,000 favorable results and 16,000 unfavorable results. 39% Favorable and 61% Unfavorable. 
+
 ### Naive Bayes by Topics
-I also wanted to incorporate the topics that I had created earlier as a feature, so I argsorted the topics for each document and assigned each document a topic that it correlated to the most. 
+I also wanted to incorporate the topics that I had created earlier as a feature, so I ArgSorted the topics for each document and assigned each document a topic that it correlated to the most. 
 ```
 TOPIC 0 Misrepresentation/Breach of Fiduciary Duty. The accuracy on the Misrepresentation/Breach of Fiduciary Duty Topic set is 0.997.
 
@@ -214,3 +221,9 @@ I also saw some good structure with looking at the PCA by the Topics that I crea
 2D by Topic                                  |  3D by Topic 
 :-------------------------------------------:|:----------------------------------------------:
 ![](images/PCA_topics_cool.png)              |  ![](images/PCA_3comp_Topics.gif)
+
+There is obviously some structure to the data, while two and three principle components only account for 21% and 24% of the variance, respectively, it is clear that there is still significant structure to this data. 
+
+# Conclusion 
+
+Using a Naive Bayes Model you can fairly accurately predict whether or not an allegation against a securities broker would result in an unfavorable result for that broker. With an accurate prediction, an attorney can best represent his client at an arbitration or drive settlement negotiations if it is highly likely to receive an unfavorable result. 
