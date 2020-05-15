@@ -40,23 +40,23 @@ I then consulted with the founder of one of the preeminent law firms that is ded
 
 TOPIC 0: `Misrepresentation/Breach of Fiduciary Duty`
 
-![](images/wordcloud_Topic0.png) 
+![](images/wordcloud_topic0.png) 
 
 TOPIC 1: `Trade Violation`
 
-![](images/wordcloud_Topic1.png) 
+![](images/wordcloud_topic1.png) 
 
 TOPIC 2: `Violation of Law`
 
-![](images/wordcloud_Topic2.png) 
+![](images/wordcloud_topic2.png) 
 
 TOPIC 3: `Reporting Violation`
 
-![](images/wordcloud_Topic3.png) 
+![](images/wordcloud_topic3.png) 
 
 TOPIC 4: `Auction Rate Securities` 
 
-![](images/wordcloud_Topic4.png) 
+![](images/wordcloud_topic4.png) 
 
 
 ## Naive Bayes
