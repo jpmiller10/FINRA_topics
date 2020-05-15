@@ -12,48 +12,99 @@ from tabulate import tabulate
 import matplotlib.pyplot as plt 
 
 def get_stop_words(new_stop_words=None):
-    # Retrieve stop words and append any additional stop words
+    '''
+    Retrieve stop words and append any additional stop words
+    Arguments:
+        new_stop_words: list of stop words to add to default english stop words list.  
+    Retrun:
+        stop_words: merged set of stop words
+    ''' 
     stop_words = list(ENGLISH_STOP_WORDS)
     if new_stop_words:
         stop_words.extend(new_stop_words)
     return set(stop_words)
 
 def remove_punctuation(string, punc=punctuation):
-    # remove given punctuation marks from a string
+    '''
+    Remove all punctuation  from a string
+    Arguments:
+        string: string from the corpus of text
+        punc: default list of punctuation  
+    Retrun:
+        string that is stripped of punctiation
+    '''
     for character in punc:
         string = string.replace(character,' ')
     return string
 
 def lemmatize_str(string):
-    # Lemmatize a string and return it in its original format
+    '''
+    Lemmatize a string
+    Arguments:
+        string: string from the corpus of text
+        punc: default list of punctuation  
+    Retrun:
+        lematized string
+    '''
     w_tokenizer = nltk.tokenize.WhitespaceTokenizer()
     lemmatizer = nltk.stem.WordNetLemmatizer()
     return " ".join([lemmatizer.lemmatize(w) for w in w_tokenizer.tokenize(string)])
 
 def clean_column(df, column, punctuation):
-    # Apply data cleaning pipeline to a given pandas DataFrame column
+    '''
+    Apply data cleaning pipeline to a given pandas DataFrame column
+    Arguments:
+        df: pandas df that contains the text to be cleaned
+        column: column of the pandas dataframe that contains the text to be cleaned
+        punctuation: list of punctuation (default = punctuation) 
+    Retrun:
+        cleaned column in dataframe
+    '''
     df[column] = df[column].apply(lambda x: str(x).lower())
     df[column] = df[column].apply(lambda x: remove_punctuation(x, punctuation))
     df[column] = df[column].apply(lambda x: lemmatize_str(x))
     return 
 
 def vectorize(df, column, stop_words):
-    # Vectorize a text column of a pandas DataFrame
+    '''
+     Vectorize a text column of a pandas DataFrame
+     Arguments:
+        df: pandas df that contains column of cleaned text
+        column: column with cleaned text
+        stop_words: set containing all default and added stopwords 
+    Retrun:
+        sparse matrix of word counts per document, array of features
+    '''
     text = df[column].values
     vectorizer = TfidfVectorizer(stop_words = stop_words) 
     X = vectorizer.fit_transform(text)
     features = np.array(vectorizer.get_feature_names())
     return X, features 
 
-def get_nmf(X, n_components=7):
-    # Create NMF matrixes based on a TF-IDF matrix
+def get_nmf(X, n_components=):
+    ''' 
+    Create NMF matrixes based on a TF-IDF matrix
+     Arguments:
+        X: sparse matrix of word conts per document
+        n_components = number of compoenets to use in model
+    Retrun:
+        array of vectors, array of features
+    '''
     nmf = NMF(n_components=n_components, max_iter=100, random_state=12345, alpha=0.0)
     W = nmf.fit_transform(X)
     H = nmf.components_
     return W, H
     
 def get_topic_words(H, features, n_features):
-    # Retrieve feature names given H matrix, feature names, and number of features
+    '''
+    #Retrieve feature names given H matrix, feature names, and number of features
+     Arguments:
+        H: H matrix
+        features: text features
+        n_features: number of features to use in model
+    Retrun:
+        top features
+    '''
     top_word_indexes = H.argsort()[:, ::-1][:,:n_features]
     return features[top_word_indexes]
 
@@ -71,9 +122,11 @@ def print_topics(topics):
     return
     
 def document_topics(W):
+    #sort documents in W
     return W.argsort()[:,::-1][:,0]
     
 def topic_counts(df):
+    #counts of each topic in grouped columns of df
     grouped = df[['topics','allegations']].groupby(['topics']).count().sort_values(by = 'allegations',ascending = False)
     print(tabulate(grouped.head(), headers='keys', tablefmt='github'))
     

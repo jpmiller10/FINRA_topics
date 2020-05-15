@@ -1,4 +1,5 @@
 
+```
 START WITH 2 TARGETS.
 
 Target: 0, name: Favorable
@@ -8,7 +9,11 @@ Target: 1, name: Unfavorable
 Top 10 tokens:  ['rule', 'firm', 'security', 'failed', 'nasd', 'alleged', 'violation', 'report', 'order', 'transaction']
 
 The accuracy on the Favorable/Unfavorable test set is 0.992.
-
+```
+Favorable                                    |  Unfavorable
+:-------------------------------------------:|:----------------------------------------------:
+![](images/nb_top_features_2_Favorable.png)  |  ![](images/nb_top_features_2_Unfavorable.png)
+```
 NOW LOADING 3 TARGETS.
 
 Target: 0, name: Favorable
@@ -21,7 +26,11 @@ Target: 2, name: Unfavorable
 Top 10 tokens:  ['rule', 'firm', 'failed', 'nasd', 'security', 'report', 'transaction', 'order', 'violation', 'finra']
 
 The accuracy on the Favorable/Settled/Unfavorable test set is 0.862.
-
+```
+Favorable                                    |  Settled                                       | Unfavorable
+:-------------------------------------------:|:----------------------------------------------:|:----------------------------------------------:
+![](images/nb_top_features_3_Favorable.png)  |  ![](images/nb_top_features_3_Settled.png)     | ![](images/nb_top_features_3_Unfavorable.png)
+```
 NOW LOADING 12 TARGETS.
 
 Target: 0, name: Decision
@@ -61,11 +70,8 @@ Target: 11, name: Favorable for Broker
 Top 10 tokens:  ['filed', 'registered', 'filing', 'formal', 'complaint', 'financials', 'bhsi', 'mv', 'applicant', 'rule']
 
 The accuracy on the Favorable/Settled/Unfavorable test set is 0.742.
+```
 
-Favorable                                    |  Unfavorable
-:-------------------------------------------:|:----------------------------------------------:
-![](images/nb_top_features_2_Favorable.png)  |  ![](images/nb_top_features_2_Unfavorable.png)
-
-Favorable                                    |  Settled                                       | Unfavorable
+Decision                                     |  Acceptance, Waiver & Consent(AWC)             | Order
 :-------------------------------------------:|:----------------------------------------------:|:----------------------------------------------:
-![](images/nb_top_features_3_Favorable.png)  |  ![](images/nb_top_features_3_Settled.png)     | ![](images/nb_top_features_3_Unfavorable.png)
+![](images/nb_top_features_12_Decision.png)  |![](images/nb_top_features_12_Acceptance, Waiver & Consent(AWC).png)| ![](images/nb_top_features_12_Order.png)

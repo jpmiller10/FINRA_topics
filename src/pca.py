@@ -17,7 +17,7 @@ font = {'family' : 'DejaVu Sans',
         'size'   : 16}
 
 def plot_pca_three_components(X, y, title='PCA_3components'):
-    '''Function for creating a 3D animatino showing the
+    '''Function for creating a 3D gif showing the
     frist three principal componets
     X: numpy.array, shape (n, 300)
     A two dimensional array containing the vectorized claims
@@ -53,11 +53,11 @@ def plot_pca_three_components(X, y, title='PCA_3components'):
 
     def init():
         # Plot the surface.
-        ax.scatter(xx, yy, zz, marker='o', cmap=cm.coolwarm, s=10, c=y, alpha=0.3)
-        ax.plot(x_axis,zeros,zeros, linewidth=4.0, color='k', alpha =1)
-        ax.plot(zeros, y_axis,zeros, linewidth=4.0, color='k', alpha =1)
-        ax.plot(zeros, zeros, z_axis, linewidth=4.0, color='k', alpha =1)
-        ax.set_title('PCA in 3 Dimensions for Favorable v. Settled v. Unfavorable')
+        ax.scatter(xx, yy, zz, marker='o', cmap=plt.cm.Dark2, s=10, c=y, alpha=0.3)
+        ax.plot(x_axis,zeros,zeros, linewidth=0.5, color='k', alpha =1)
+        ax.plot(zeros, y_axis,zeros, linewidth=0.5, color='k', alpha =1)
+        ax.plot(zeros, zeros, z_axis, linewidth=0.5, color='k', alpha =1)
+        ax.set_title(title)
         ax.axis('off')
         ax.set_xlim(xx_center-xx_range/2, xx_center+xx_range/2)
         ax.set_ylim(yy_center-yy_range/2, yy_center+yy_range/2)
@@ -68,13 +68,13 @@ def plot_pca_three_components(X, y, title='PCA_3components'):
 
     def animate(i):
         # azimuth angle : 0 deg to 360 deg
-        ax.view_init(elev=0, azim=i*2)
+        ax.view_init(elev=15, azim=i*2)
         return fig,
 
     # Animate
     ani = animation.FuncAnimation(fig, animate, init_func=init,
                                    frames=180, interval=180, blit=True)
-    fn = '3d_pca_3targets'
+    fn = title
     ani.save('images/'+fn+'.gif',writer='PillowWriter',fps=30,savefig_kwargs={'transparent': True, 'facecolor': 'none'})
 
 if __name__ == "__main__":
@@ -88,20 +88,16 @@ if __name__ == "__main__":
     to_numeric(df_finra, ['targets_1', 'targets_2'])
     
     X = df_finra['allegations']
-    y = df_finra['targets_2']
+    y = df_finra['targets_1']
+    y2 = df_finra['targets_2']
     
     count_vect = CountVectorizer(lowercase=True, tokenizer=None, stop_words='english',
                              analyzer='word', max_df=1.0, min_df=1, max_features=None)
 
     count_vect.fit(X)
 
-    # target_names = categories
-
     X_counts = count_vect.transform(X)
     
-    # print("The type of X_train_counts is {0}.".format(type(X_train_counts)))
-    # print("The X matrix has {0} rows (documents) and {1} columns (words).".format(
-    #     X_train_counts.shape[0], X_train_counts.shape[1]))
 
     tfidf_transformer = TfidfTransformer(use_idf=True)
     tfidf_transformer.fit(X_counts)
@@ -111,32 +107,35 @@ if __name__ == "__main__":
     pca = PCA(n_components=3)
     X_pca = pca.fit_transform(X_tfidf)
     evr = pca.explained_variance_ratio_
-    # print(evr)
-    # print("The 2 principal components explain {0:0.1f}%"
-    #     " of the variance in the original data.".format(evr.sum()*100))
+    print(evr)
+    print("The 2 principal components explain {0:0.1f}%"
+        " of the variance in the original data.".format(evr.sum()*100))
 
-    # fig, ax = plt.subplots(1, 1, figsize=(8, 6))
-    # ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y, 
-    #         cmap=plt.cm.Set1, edgecolor='k', s=40)
-    # ax.set_title("First two PCA directions")
-    # ax.set_xlabel("1st eigenvector (PC1)")
-    # ax.set_ylabel("2nd eigenvector (PC2)");
-    # plt.savefig(f"images/PCA_topics.png")
+    fig, ax = plt.subplots(1, 1, figsize=(8, 6))
+    ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y, 
+            cmap=plt.cm.Set1, edgecolor='k', s=40)
+    ax.set_title("First two PCA directions")
+    ax.set_xlabel("1st eigenvector (PC1)")
+    ax.set_ylabel("2nd eigenvector (PC2)");
+    plt.savefig(f"images/PCA_topics.png")
 
-    plot_pca_three_components(X_tfidf, y, title='PCA_3components')
+    plot_pca_three_components(X_tfidf, y, title='PCA_3components_2targets')
+    plot_pca_three_components(X_tfidf, y, title='PCA_3components_3targets')
 
-    # pca = PCA(n_components=3)
-    # X_pca = pca.fit_transform(X_tfidf) 
-    # evr = pca.explained_variance_ratio_
-    # print(evr)
-    # print("The 3 principal components explain {0:0.1f}%"
-    #     " of the variance in the original data.".format(evr.sum()*100))
+    
 
-    # fig = plt.figure() 
-    # ax = fig.add_subplot(111, projection='3d') 
-    # ax.scatter(X_pca[:, 0], X_pca[:, 1], X_pca[:, 2], c=y, 
-    #             cmap=plt.cm.Set1, edgecolor='k', s=40) 
-    # ax.set_xlabel('PC1') 
-    # ax.set_ylabel('PC2') 
-    # ax.set_zlabel('PC3') 
-    # plt.savefig(f"images/PCA_3d.png")
+    pca = PCA(n_components=3)
+    X_pca = pca.fit_transform(X_tfidf) 
+    evr = pca.explained_variance_ratio_
+    print(evr)
+    print("The 3 principal components explain {0:0.1f}%"
+        " of the variance in the original data.".format(evr.sum()*100))
+
+    fig = plt.figure() 
+    ax = fig.add_subplot(111, projection='3d') 
+    ax.scatter(X_pca[:, 0], X_pca[:, 1], X_pca[:, 2], c=y, 
+                cmap=plt.cm.Set1, edgecolor='k', s=40) 
+    ax.set_xlabel('PC1') 
+    ax.set_ylabel('PC2') 
+    ax.set_zlabel('PC3') 
+    plt.savefig(f"images/PCA_3d.png")

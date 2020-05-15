@@ -14,6 +14,13 @@ font = {'family' : 'DejaVu Sans',
         'size'   : 16}
 
 def print_top_words(categories):
+    '''
+    Print top words for each category in a topic
+     Arguments:
+        categories: a list of all the values in a categorical column
+    Print:
+        List of top words for each feature
+    '''
     for cat in range(len(categories)):
         print(f"\nTarget: {cat}, name: {target_names[cat]}")
         log_prob = nb_model.feature_log_prob_[cat]

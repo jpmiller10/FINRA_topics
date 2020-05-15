@@ -15,6 +15,13 @@ font = {'family' : 'DejaVu Sans',
 
 
 def print_top_words(categories):
+        '''
+    Print top words for each category in a topic
+     Arguments:
+        categories: a list of all the values in a categorical column
+    Print:
+        List of top words for each category
+        '''
     for cat in range(len(categories)):
         print(f"\nTarget: {cat}, name: {target_names[cat]}")
         log_prob = nb_model.feature_log_prob_[cat]
@@ -22,21 +29,9 @@ def print_top_words(categories):
         features_topn = [feature_words[i] for i in i_topn]
         print(f"Top {n} tokens: ", features_topn)
 
-def define_axis_style(ax, title, x_label, y_label, legend=False):
-    '''
-    Function to define labels/title font sizes for consistency across plots
-    '''
-    ax.set_title(title, fontsize=18)
-    ax.set_ylabel(y_label, fontsize=16)
-    ax.set_xlabel(x_label, fontsize=16)
-    ax.tick_params(labelsize=14)
-    if legend:
-        ax.legend(fontsize=16)
-    return
-
 def plot_feature_importances(ax, feat_importances, feat_std_deviations, feat_names, n_features, outfilename):
     '''
-    Plot feature importances for an NLP model
+    Plot feature importances for an Naive Bayes Model
     feat_importances : Array of feature importances
     feat_std_deviations : Standard deviations of feature importances (intended for RandomForest) **OPTIONAL
     feat_names : Array of feature names
@@ -54,6 +49,18 @@ def plot_feature_importances(ax, feat_importances, feat_std_deviations, feat_nam
     plt.tight_layout()
     plt.savefig(outfilename)
     plt.close('all')
+    return
+
+def define_axis_style(ax, title, x_label, y_label, legend=False):
+    '''
+    Sets labels and sizes
+    '''
+    ax.set_title(title, fontsize=18)
+    ax.set_ylabel(y_label, fontsize=16)
+    ax.set_xlabel(x_label, fontsize=16)
+    ax.tick_params(labelsize=14)
+    if legend:
+        ax.legend(fontsize=16)
     return
 
 if __name__ == "__main__":
