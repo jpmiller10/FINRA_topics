@@ -6,7 +6,7 @@
 In consultation with a law firm here in the Denver Metro Area, I sought to provide a tool for use in client-counseling in the context of a pending FINRA arbitration. 
 
 ## What is FINRA?
-FINRA is a quasi-governmental regulatory body authorized by Congress to protect America’s investors by making sure the broker-dealer industry operates fairly and honestly. We oversee more than 634,000 brokers across the country—and analyze billions of daily market events.
+FINRA is a quasi-governmental regulatory body authorized by Congress to protect America’s investors by making sure the broker-dealer industry operates fairly and honestly. They oversee more than 634,000 brokers across the country and analyze daily market events.
 
 ## The DataSet
 This DataSet contained over 27,232 FINRA Arbitration records from 1964 through 2018. It contained the fields of:
