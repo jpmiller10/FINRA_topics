@@ -53,7 +53,7 @@ def plot_pca_three_components(X, y, title='PCA_3components'):
 
     def init():
         # Plot the surface.
-        ax.scatter(xx, yy, zz, marker='o', cmap=plt.cm.Dark2, s=10, c=y, alpha=0.3)
+        ax.scatter(xx, yy, zz, marker='o', cmap=cm.coolwarm, s=10, c=y, alpha=0.3)
         ax.plot(x_axis,zeros,zeros, linewidth=0.5, color='k', alpha =1)
         ax.plot(zeros, y_axis,zeros, linewidth=0.5, color='k', alpha =1)
         ax.plot(zeros, zeros, z_axis, linewidth=0.5, color='k', alpha =1)
@@ -90,6 +90,7 @@ if __name__ == "__main__":
     X = df_finra['allegations']
     y = df_finra['targets_1']
     y2 = df_finra['targets_2']
+    y3 = df_finra['topics']
     
     count_vect = CountVectorizer(lowercase=True, tokenizer=None, stop_words='english',
                              analyzer='word', max_df=1.0, min_df=1, max_features=None)
@@ -107,35 +108,35 @@ if __name__ == "__main__":
     pca = PCA(n_components=3)
     X_pca = pca.fit_transform(X_tfidf)
     evr = pca.explained_variance_ratio_
-    print(evr)
-    print("The 2 principal components explain {0:0.1f}%"
-        " of the variance in the original data.".format(evr.sum()*100))
+    # print(evr)
+    # print("The 2 principal components explain {0:0.1f}%"
+    #     " of the variance in the original data.".format(evr.sum()*100))
 
-    fig, ax = plt.subplots(1, 1, figsize=(8, 6))
-    ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y, 
-            cmap=plt.cm.Set1, edgecolor='k', s=40)
-    ax.set_title("First two PCA directions")
-    ax.set_xlabel("1st eigenvector (PC1)")
-    ax.set_ylabel("2nd eigenvector (PC2)");
-    plt.savefig(f"images/PCA_topics.png")
+    # fig, ax = plt.subplots(1, 1, figsize=(8, 6))
+    # ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y, 
+    #         cmap=plt.cm.Set1, edgecolor='k', s=40)
+    # ax.set_title("First two PCA directions")
+    # ax.set_xlabel("1st eigenvector (PC1)")
+    # ax.set_ylabel("2nd eigenvector (PC2)");
+    # plt.savefig(f"images/PCA_topics.png")
 
-    plot_pca_three_components(X_tfidf, y, title='PCA_3components_2targets')
-    plot_pca_three_components(X_tfidf, y, title='PCA_3components_3targets')
-
+    plot_pca_three_components(X_tfidf, y, title='PCA_3comp_2targets')
+    plot_pca_three_components(X_tfidf, y2, title='PCA_3comp_3targets')
+    plot_pca_three_components(X_tfidf, y3, title='PCA_3comp_Topics')
     
 
-    pca = PCA(n_components=3)
-    X_pca = pca.fit_transform(X_tfidf) 
-    evr = pca.explained_variance_ratio_
-    print(evr)
-    print("The 3 principal components explain {0:0.1f}%"
-        " of the variance in the original data.".format(evr.sum()*100))
+    # pca = PCA(n_components=3)
+    # X_pca = pca.fit_transform(X_tfidf) 
+    # evr = pca.explained_variance_ratio_
+    # print(evr)
+    # print("The 3 principal components explain {0:0.1f}%"
+    #     " of the variance in the original data.".format(evr.sum()*100))
 
-    fig = plt.figure() 
-    ax = fig.add_subplot(111, projection='3d') 
-    ax.scatter(X_pca[:, 0], X_pca[:, 1], X_pca[:, 2], c=y, 
-                cmap=plt.cm.Set1, edgecolor='k', s=40) 
-    ax.set_xlabel('PC1') 
-    ax.set_ylabel('PC2') 
-    ax.set_zlabel('PC3') 
-    plt.savefig(f"images/PCA_3d.png")
+    # fig = plt.figure() 
+    # ax = fig.add_subplot(111, projection='3d') 
+    # ax.scatter(X_pca[:, 0], X_pca[:, 1], X_pca[:, 2], c=y, 
+    #             cmap=plt.cm.Set1, edgecolor='k', s=40) 
+    # ax.set_xlabel('PC1') 
+    # ax.set_ylabel('PC2') 
+    # ax.set_zlabel('PC3') 
+    # plt.savefig(f"images/PCA_3d.png")
