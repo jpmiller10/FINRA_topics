@@ -21,14 +21,14 @@ def make_wordcloud(arr1, arr2, title, stop_words):
         # Display the generated image:
         plt.imshow(wordcloud, interpolation='bilinear')
         plt.axis("off")
-        plt.tight_layout()
-        plt.savefig(f"images/wordcloud_{title}{topic}.png")
+        plt.tight_layout(pad = 0)
+        plt.savefig("images/wordcloud1_{title}{topic}.png")
     
 
 if __name__ == "__main__":
     df_finra = pd.read_pickle('data/finra_pickled_df_top')
 
-    # clean_column(df_finra, 'allegations', punctuation)
+    clean_column(df_finra, 'allegations', punctuation)
 
     additional_stop_words = [
         "the",

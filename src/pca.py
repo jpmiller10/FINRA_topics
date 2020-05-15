@@ -68,7 +68,7 @@ def plot_pca_three_components(X, y, title='PCA_3components'):
 
     def animate(i):
         # azimuth angle : 0 deg to 360 deg
-        ax.view_init(elev=15, azim=i*2)
+        ax.view_init(elev=195, azim=i*2)
         return fig,
 
     # Animate
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     X_tfidf = tfidf_transformer.transform(X_counts)
     X_tfidf = X_tfidf.todense()
 
-    pca = PCA(n_components=3)
+    pca = PCA(n_components=2)
     X_pca = pca.fit_transform(X_tfidf)
     evr = pca.explained_variance_ratio_
     # print(evr)
@@ -114,15 +114,33 @@ if __name__ == "__main__":
 
     # fig, ax = plt.subplots(1, 1, figsize=(8, 6))
     # ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y, 
-    #         cmap=plt.cm.Set1, edgecolor='k', s=40)
-    # ax.set_title("First two PCA directions")
+    #         cmap=cm.coolwarm, edgecolor='k', s=40)
+    # ax.set_title("First Two PCA Directions with Two Targets")
     # ax.set_xlabel("1st eigenvector (PC1)")
     # ax.set_ylabel("2nd eigenvector (PC2)");
-    # plt.savefig(f"images/PCA_topics.png")
+    # plt.savefig("images/PCA_2com_cool.png")
 
-    plot_pca_three_components(X_tfidf, y, title='PCA_3comp_2targets')
-    plot_pca_three_components(X_tfidf, y2, title='PCA_3comp_3targets')
-    plot_pca_three_components(X_tfidf, y3, title='PCA_3comp_Topics')
+
+    # fig, ax = plt.subplots(1, 1, figsize=(8, 6))
+    # ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y2, 
+    #         cmap=cm.coolwarm, edgecolor='k', s=40)
+    # ax.set_title("First Two PCA Directions with Three Targets")
+    # ax.set_xlabel("1st eigenvector (PC1)")
+    # ax.set_ylabel("2nd eigenvector (PC2)");
+    # plt.savefig("images/PCA_3com_cool.png")
+
+
+    fig, ax = plt.subplots(1, 1, figsize=(8, 8))
+    ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y3, 
+            cmap=cm.coolwarm, edgecolor='k', s=40)
+    ax.set_title("First Two PCA Directions by Topic")
+    ax.set_xlabel("1st eigenvector (PC1)")
+    ax.set_ylabel("2nd eigenvector (PC2)");
+    plt.savefig("images/PCA_topics_cool.png")
+
+    # plot_pca_three_components(X_tfidf, y, title='PCA_3comp_2targets')
+    # plot_pca_three_components(X_tfidf, y2, title='PCA_3comp_3targets')
+    # plot_pca_three_components(X_tfidf, y3, title='PCA_3comp_Topics')
     
 
     # pca = PCA(n_components=3)

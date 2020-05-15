@@ -46,11 +46,11 @@ TOPIC 1: `Trade Violation`
 
 ![](images/wordcloud_Topic1.png) 
 
-TOPIC 2: `Reporting Violation`
+TOPIC 2: `Violation of Law`
 
 ![](images/wordcloud_Topic2.png) 
 
-TOPIC 3: `Violation of Law`
+TOPIC 3: `Reporting Violation`
 
 ![](images/wordcloud_Topic3.png) 
 
@@ -177,14 +177,14 @@ Top 10 tokens:  ['account', 'use', 'activity', 'controversy', 'involved', 'relat
 Target: 1, name: Unfavorable
 Top 10 tokens:  ['conversion', 'unknown', 'filing', 'allegation', 'asked', 'action', 'administrative', 'marked', 'reported', 'previously']
 
-TOPIC 2 Reporting Violation. The accuracy on the Reporting Violation Topic set is 0.987.
+TOPIC 2  Violation of Law. The accuracy on the Violation of Law Topic set is 0.987.
 
 Target: 0, name: Favorable
 Top 10 tokens:  ['firm', 'complaint', 'rule', 'alleges', 'act', 'exchange', 'section', 'violation', 'finra', 'security']
 Target: 1, name: Unfavorable
 Top 10 tokens:  ['rule', 'firm', 'failed', 'nasd', 'security', 'violation', 'report', 'order', 'transaction', 'alleged']
 
-TOPIC 3 Violation of Law. The accuracy on the Violation of Law Topic set is 0.996.
+TOPIC 3 Reporting Violation. The accuracy on the Reporting Violation Topic set is 0.996.
 
 Target: 0, name: Favorable
 Top 10 tokens:  ['account', 'related', 'activity', 'negligence', 'brch', 'dt', 'fiduciary', 'breach', 'contract', 'failure']
@@ -207,10 +207,10 @@ I moved on to PCA because I wanted to ensure that there was actually some struct
 
 2 Targets                                    |  3 Targets
 :-------------------------------------------:|:----------------------------------------------:
-![](images/PCA.png)                          |  ![](images/PCA_3targets.png)
-![](images/3d_pca_2targets.gif)              |  ![](images/3d_pca_3targets.gif)
+![](images/PCA_2com_cool.png)                |  ![](images/PCA_3com_cool.png)
+![](images/PCA_3comp_2targets.gif)           |  ![](images/PCA_3comp_3targets.gif)
 
-I also saw some good structure with looking at the PCA by t
+I also saw some good structure with looking at the PCA by the Topics that I created using NMF. 
 2D by Topic                                  |  3D by Topic 
 :-------------------------------------------:|:----------------------------------------------:
-![](images/PCA.png)                          |  ![](images/PCA_3targets.png)
+![](images/PCA_topics_cool.png)              |  ![](images/PCA_3comp_Topics.gif)
