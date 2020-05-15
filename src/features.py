@@ -97,7 +97,7 @@ def get_nmf(X, n_components=):
     
 def get_topic_words(H, features, n_features):
     '''
-    #Retrieve feature names given H matrix, feature names, and number of features
+    Retrieve feature names given H matrix, feature names, and number of features
      Arguments:
         H: H matrix
         features: text features

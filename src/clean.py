@@ -9,11 +9,9 @@ from scipy.cluster.hierarchy import linkage, dendrogram
 
 def load_csv(file_path):
     '''
-    Creates dataframe for cleaning from Denver 311 info found at: 
-    https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-311-service-requests-2007-to-current    
+    Creates dataframe for cleaning   
     Arguments:
-        file_path: filepath for the .csv file as a str i.e. 'data/311_service_data_2018.csv'
-        df_year: df_{year of the data} i.e. 2018 > df_2018
+        file_path: filepath for the .csv 
     Returns:
         df: dataframe
     '''
@@ -73,18 +71,6 @@ def to_categorical(df, cols):
     ''' 
     for c in cols:
         df[c] = df[c].astype("category")
-    return df
-
-def elapsed_time(df, col1, col2):
-    '''
-    Arguments:
-        col1: str of start time column name
-        col2: str of completion time column name
-    Retrun:
-        df: dataframe
-    ''' 
-    df['Response_Time']= df[col2] - df[col1]
-    df['Response_Value'] = df['Response_Time'].dt.total_seconds()/84600 
     return df
 
 def fill_resolutions(df, col, str):
