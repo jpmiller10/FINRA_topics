@@ -83,7 +83,12 @@ if __name__ == '__main__':
     df_finra = pd.read_pickle('data/finra_pickled_df')
     
     additional_stop_words = [
-        "the"
+        "the",
+        "raymond",
+        "james",
+        "alleged",
+        "involvedaccount",
+        "involveduse"
     ]
     
     stop_words = get_stop_words(additional_stop_words)
@@ -96,6 +101,7 @@ if __name__ == '__main__':
     W, H = get_nmf(X, n_components=n_topics)
     top_words = get_topic_words(H, features, n_features=n_top_words)
     df_finra['topics'] = document_topics(W)
+    #df_firna['topics'] = df_firna['topics']
     print_topics(top_words)
     df_finra.to_pickle("data/finra_pickled_df_top")
     topic_counts(df_finra)

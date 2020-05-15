@@ -109,12 +109,41 @@ def drop_nan_col(df, col):
     df= df.dropna(subset=[col], inplace=True) 
     return df
 
+ 
+
 if __name__ == '__main__':
     df = load_csv('data/finra_data.csv')
     df = fill_resolutions(df, 'resolution', 'Favorable for Broker') 
     drop_nan_col(df, 'allegations')
     col_list = ['resolution']
     df = to_categorical(df, col_list)
-    #to_datetime(df,['date_initiated', 'resolution_date'])
-    
+    #to_datetime(df,['date_initiated', 'resolution_date']) - unused
+    df['targets_1'] = df['resolution']
+    df['targets_1'] = df['targets_1'].replace('Dismissed','Favorable')
+    df['targets_1'] = df['targets_1'].replace('Favorable for Broker','Favorable')
+    df['targets_1'] = df['targets_1'].replace('Withdrawn','Favorable')
+    df['targets_1'] = df['targets_1'].replace('Acceptance, Waiver & Consent(AWC)','Unfavorable')
+    df['targets_1'] = df['targets_1'].replace('Consent','Unfavorable')
+    df['targets_1'] = df['targets_1'].replace('Decision','Unfavorable')
+    df['targets_1'] = df['targets_1'].replace('Decision & Order of Offer of Settlement','Unfavorable')
+    df['targets_1'] = df['targets_1'].replace('Judgment Rendered','Unfavorable')
+    df['targets_1'] = df['targets_1'].replace('Order','Unfavorable')
+    df['targets_1'] = df['targets_1'].replace('Other','Unfavorable')
+    df['targets_1'] = df['targets_1'].replace('Settled','Unfavorable')
+    df['targets_1'] = df['targets_1'].replace('Stipulation and Consent','Unfavorable')
+    to_categorical(df, ['targets_1'])
+    df['targets_2'] = df['resolution']
+    df['targets_2'] = df['targets_2'].replace('Dismissed','Favorable')
+    df['targets_2'] = df['targets_2'].replace('Favorable for Broker','Favorable')
+    df['targets_2'] = df['targets_2'].replace('Withdrawn','Favorable')
+    df['targets_2'] = df['targets_2'].replace('Acceptance, Waiver & Consent(AWC)','Unfavorable')
+    df['targets_2'] = df['targets_2'].replace('Consent','Settled')
+    df['targets_2'] = df['targets_2'].replace('Decision','Unfavorable')
+    df['targets_2'] = df['targets_2'].replace('Decision & Order of Offer of Settlement','Settled')
+    df['targets_2'] = df['targets_2'].replace('Judgment Rendered','Unfavorable')
+    df['targets_2'] = df['targets_2'].replace('Order','Unfavorable')
+    df['targets_2'] = df['targets_2'].replace('Other','Unfavorable')
+    df['targets_2'] = df['targets_2'].replace('Settled','Settled')
+    df['targets_2'] = df['targets_2'].replace('Stipulation and Consent','Settled')
+    to_categorical(df, ['targets_2'])
     df.to_pickle('data/finra_pickled_df')
