@@ -6,7 +6,7 @@
 In consultation with a law firm here in the Denver Metro Area, I sought to provide a tool for use in client-counseling in the context of a pending FINRA arbitration. 
 
 ## What is FINRA?
-FINRA is a quasi-governmental regulatory body authorized by Congress to protect America’s investors by making sure the broker-dealer industry operates fairly and honestly. We oversee more than 634,000 brokers across the country—and analyze billions of daily market events.
+FINRA is a quasi-governmental regulatory body authorized by Congress to protect America’s investors by making sure the broker-dealer industry operates fairly and honestly. They oversee more than 634,000 brokers across the country and analyze daily market events.
 
 ## The DataSet
 This DataSet contained over 27,232 FINRA Arbitration records from 1964 through 2018. It contained the fields of:
@@ -227,3 +227,7 @@ There is obviously some structure to the data, while two and three principle com
 # Conclusion 
 
 Using a Naive Bayes Model you can fairly accurately predict whether or not an allegation against a securities broker would result in an unfavorable result for that broker. With an accurate prediction, an attorney can best represent his client at an arbitration or drive settlement negotiations if it is highly likely to receive an unfavorable result. 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 574ef1e12b08ceea12dcb7523294e5b8387a7a5a
