@@ -221,12 +221,9 @@ I also saw some good structure with looking at the PCA by the Topics that I crea
 2D by Topic                                  |  3D by Topic 
 :-------------------------------------------:|:----------------------------------------------:
 ![](images/PCA_topics_cool.png)              |  ![](images/PCA_3comp_Topics.gif)
-<<<<<<< HEAD
 
 There is obviously some structure to the data, while two and three principle components only account for 21% and 24% of the variance, respectively, it is clear that there is still significant structure to this data. 
 
 # Conclusion 
 
 Using a Naive Bayes Model you can fairly accurately predict whether or not an allegation against a securities broker would result in an unfavorable result for that broker. With an accurate prediction, an attorney can best represent his client at an arbitration or drive settlement negotiations if it is highly likely to receive an unfavorable result. 
-=======
->>>>>>> c3e1e9db17555c662cde8515f6a8df7d6d5f2fbe

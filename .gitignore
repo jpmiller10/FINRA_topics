@@ -5,5 +5,7 @@ __pycache__
 /data/brokercheck_firms.csv
 /data/finra_data.csv
 /data/finra_pickled_df
-/data/finra_pickled_df_top
-.DS_Store
+/data/
+/zipfiles/
+/src/scrape.py
+# .DS_Store
