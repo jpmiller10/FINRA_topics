@@ -64,7 +64,7 @@ if __name__ == "__main__":
     df_arb = df_arb.drop_duplicates(subset = ['Arbitrator ID'], keep = 'first') 
 
     cols_for_model = ['Arbitrator ID', 'NAME', 'Chair Count', 'Panelist Count',
-       'Background Information']
+       'Background Information', 'City/State/Country']
 
     df_arb_mod = keep_cols(df_arb, cols_for_model)
 
