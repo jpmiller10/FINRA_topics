@@ -78,8 +78,8 @@ def vectorize(df, column, stop_words):
     text = df[column].values
     vectorizer = TfidfVectorizer(stop_words = stop_words) 
     X = vectorizer.fit_transform(text)
-    features = np.array(vectorizer.get_feature_names())
-    return X, features 
+    feature = np.array(vectorizer.get_feature_names())
+    return X, feature 
 
 def get_nmf(X, n_components=7):
     ''' 
@@ -150,9 +150,9 @@ if __name__ == '__main__':
     n_top_words = 10
     clean_column(df_finra, 'allegations', punc)
 
-    X, features = vectorize(df_finra, 'allegations', stop_words)
+    X, feature = vectorize(df_finra, 'allegations', stop_words)
     W, H = get_nmf(X, n_components=n_topics)
-    top_words = get_topic_words(H, features, n_features=n_top_words)
+    top_words = get_topic_words(H, feature, n_features=n_top_words)
     df_finra['topics'] = document_topics(W)
     #df_firna['topics'] = df_firna['topics']
     print_topics(top_words)
