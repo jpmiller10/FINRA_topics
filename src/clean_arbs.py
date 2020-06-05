@@ -68,6 +68,10 @@ if __name__ == "__main__":
 
     df_arb_mod = keep_cols(df_arb, cols_for_model)
 
+    df_arb_mod['state']= (df_arb_mod['City/State/Country'].str.split(" / ", n = 1, expand = True))[1]
+    df_arb_mod['country']= (df_arb_mod['state'].str.split(" / ", n = 1, expand = True))[1]
+    df_arb_mod['state']= (df_arb_mod['state'].str.split(" / ", n = 1, expand = True))[0]
+
     additional_stop_words = [
         "the",
         "raymond",
