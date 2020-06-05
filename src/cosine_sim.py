@@ -6,28 +6,11 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
 
-# pkl_file = open('../data/df.pkl', 'rb')
-# df = pickle.load(pkl_file)
-# pkl_file.close() 
 
-# df = df.reset_index(drop=True)
-
-# features = ['top_elev_(ft)', 
-#             'bottom_elev_(ft)', 
-#             'vert_rise_(ft)', 
-#             'slope_length_(ft)', 
-#             'avg_width_(ft)', 
-#             'slope_area_(acres)', 
-#             'avg_grade_(%)', 
-#             'max_grade_(%)', 
-#             'groomed']
-# X = df[features].values
-
-# ss = StandardScaler()
-# X = ss.fit_transform(X)
-
-def cos_arbitration_recommendations(arbitrator_name, state_name, X, n=5, state=None):
-    index = df.index[(df['FULL NAME'] == arbitrator_name) & (df['state'] == state_name)][0]
+def cos_arbitration_recommendations(arbitrator_name, X, n=5, state=None):
+    # (arbitrator_name, state_name, X, n=5, state=None)
+    # index = df.index[(df['FULL NAME'] == arbitrator_name) & (df['state'] == state_name)][0]
+    index = df.index[(df['FULL NAME'] == arbitrator_name)][0]
     trail = X[index].reshape(1,-1)
     cs = cosine_similarity(trail, X)
     rec_index = np.argsort(cs)[0][::-1][1:]
@@ -70,4 +53,5 @@ if __name__ == "__main__":
     ss = StandardScaler()
     X = ss.fit_transform(X)
     
-    print(cos_arbitration_recommendations('Mr. Robert G. Geeseman','FL',X,n=5,state='AZ'))
+    print(cos_arbitration_recommendations('Mr. Edward A. Trabin',X,n=5,state=None))
+    # print(cos_arbitration_recommendations('Mr. Edward A. Trabin','FL',X,n=5,state='AZ'))
