@@ -44,7 +44,8 @@ def topic_counts(df):
 
 if __name__ == "__main__":
     # df_case = load_csv('data/finra_5k.txt')
-    df_case = load_csv('data/finra_20k.txt')
+    # df_case = load_csv('data/finra_20k.txt')
+    df_case = load_csv('data/scraped_content.txt')
     df_case['site'] = df_case['site'].replace('\n','', regex=True)
     df_case = df_case[df_case.site.str.contains("AAO")] 
     df_case['site'] = df_case['site'].replace('HTTPS://WWW.FINRA.ORG/SITES/DEFAULT/FILES/AAO_DOCUMENTS/','', regex=True)

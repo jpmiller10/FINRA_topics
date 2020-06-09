@@ -8,8 +8,6 @@ warnings.filterwarnings('ignore')
 
 
 def cos_arbitration_recommendations(arbitrator_name, X, n=5, state=None):
-    # (arbitrator_name, state_name, X, n=5, state=None)
-    # index = df.index[(df['FULL NAME'] == arbitrator_name) & (df['state'] == state_name)][0]
     index = df.index[(df['FULL NAME'] == arbitrator_name)][0]
     trail = X[index].reshape(1,-1)
     cs = cosine_similarity(trail, X)

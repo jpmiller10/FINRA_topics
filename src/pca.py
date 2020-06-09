@@ -75,7 +75,7 @@ def plot_pca_three_components(X, y, title='PCA_3components'):
     ani = animation.FuncAnimation(fig, animate, init_func=init,
                                    frames=180, interval=180, blit=True)
     fn = title
-    ani.save('images/'+fn+'.gif',writer='PillowWriter',fps=30,savefig_kwargs={'transparent': True, 'facecolor': 'none'})
+    ani.save('images/'+fn+'.gif',writer='PillowWriter',fps=5,savefig_kwargs={'transparent': True, 'facecolor': 'none'})
 
 if __name__ == "__main__":
     
@@ -108,9 +108,9 @@ if __name__ == "__main__":
     pca = PCA(n_components=2)
     X_pca = pca.fit_transform(X_tfidf)
     evr = pca.explained_variance_ratio_
-    # print(evr)
-    # print("The 2 principal components explain {0:0.1f}%"
-    #     " of the variance in the original data.".format(evr.sum()*100))
+    print(evr)
+    print("The 2 principal components explain {0:0.1f}%"
+        " of the variance in the original data.".format(evr.sum()*100))
 
     # fig, ax = plt.subplots(1, 1, figsize=(8, 6))
     # ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y, 
@@ -130,17 +130,17 @@ if __name__ == "__main__":
     # plt.savefig("images/PCA_3com_cool.png")
 
 
-    fig, ax = plt.subplots(1, 1, figsize=(8, 8))
-    ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y3, 
-            cmap=cm.coolwarm, edgecolor='k', s=40)
-    ax.set_title("First Two PCA Directions by Topic")
-    ax.set_xlabel("1st eigenvector (PC1)")
-    ax.set_ylabel("2nd eigenvector (PC2)");
-    plt.savefig("images/PCA_topics_cool.png")
+    # fig, ax = plt.subplots(1, 1, figsize=(8, 8))
+    # ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y3, 
+    #         cmap=cm.coolwarm, edgecolor='k', s=40)
+    # ax.set_title("First Two PCA Directions by Topic")
+    # ax.set_xlabel("1st eigenvector (PC1)")
+    # ax.set_ylabel("2nd eigenvector (PC2)");
+    # plt.savefig("images/PCA_topics_cool.png")
 
-    # plot_pca_three_components(X_tfidf, y, title='PCA_3comp_2targets')
+    plot_pca_three_components(X_tfidf, y, title='PCA_3comp_2targets_veryslow')
     # plot_pca_three_components(X_tfidf, y2, title='PCA_3comp_3targets')
-    # plot_pca_three_components(X_tfidf, y3, title='PCA_3comp_Topics')
+    plot_pca_three_components(X_tfidf, y3, title='PCA_3comp_Topics_veryslow')
     
 
     # pca = PCA(n_components=3)
